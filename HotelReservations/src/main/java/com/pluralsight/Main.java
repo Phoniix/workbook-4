@@ -1,5 +1,6 @@
 package com.pluralsight;
 
+import com.pluralsight.objects.Reservation;
 import com.pluralsight.ui.LogInScreen;
 
 import java.time.LocalDate;
@@ -11,11 +12,8 @@ public class Main {
     private LocalDate endDate = null;
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        boolean keepGoing = true;
-        while (keepGoing) {
-            LogInScreen.LogIn(scanner);
-        }
+        Reservation newStay = new Reservation("king", 3, false);
+        System.out.println(newStay.getPrice() + " " + newStay.getReservationTotal());
     }
 
     public static void getDates () {

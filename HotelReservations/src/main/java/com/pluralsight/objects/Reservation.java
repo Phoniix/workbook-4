@@ -5,18 +5,18 @@ import java.time.LocalDate;
 public class Reservation {
 
     private String roomType = "double";
-    private double price = 124.00;
+    private static double price = 124.00;
     private int numberOfNights = 0;
     private boolean isWeekend = false;
-    private double reservationTotal = 0;
+    private static double reservationTotal = 0;
 
     // Constructor
-    public Reservation(String roomType, double price, int numberOfNights, boolean isWeekend, double reservationTotal) {
+    public Reservation(String roomType, int numberOfNights, boolean isWeekend) {
         this.roomType = roomType;
-        this.price = price;
+        this.price = setPrice(this.roomType, this.isWeekend);
         this.numberOfNights = numberOfNights;
         this.isWeekend = isWeekend;
-        this.reservationTotal = reservationTotal;
+        this.reservationTotal = setReservationTotal(this.price, this.numberOfNights);
     }
 
     //Getters
@@ -45,8 +45,15 @@ public class Reservation {
         this.roomType = roomType;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    private double setPrice(String roomType, boolean isWeekend) {
+        if (this.isWeekend) {
+            if (this.roomType.equals("king")) {this.price = 152.90;}
+            if (this.roomType.equals("double")) {this.price = 136.40;}
+        } else {
+            if (this.roomType.equals("king")) {this.price = 139.00;}
+            if (this.roomType.equals("double")) {this.price = 124.00;}
+        }
+        return this.price;
     }
 
     public void setNumberOfNights(int numberOfNights) {
@@ -58,15 +65,8 @@ public class Reservation {
         isWeekend = weekend;
     }
 
-    public void setReservationTotal(double reservationTotal) {
-        if (this.isWeekend) {
-            if (this.roomType.equals("king")) {this.price = 152.90;}
-            if (this.roomType.equals("double")) {this.price = 136.40;}
-        } else {
-            if (this.roomType.equals("king")) {this.price = 139.00;}
-            if (this.roomType.equals("double")) {this.price = 124.00;}
-        }
-        this.reservationTotal = this.price * this.numberOfNights;
+    private double setReservationTotal(double price, int numberOfNights) {
+        return this.reservationTotal = this.price * this.numberOfNights;
     }
 
     //ToString

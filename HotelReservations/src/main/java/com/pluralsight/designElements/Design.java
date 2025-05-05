@@ -36,7 +36,7 @@ public class Design {
             e.printStackTrace();
         }
     }
-    public static String promptUser () {
+    public static String promptUserMenuReturn () {
         return "You can also enter (0) to return to menu, or (X) to exit app.";
     }
     public static String autoLineBreakAt100UpTo300 (String input) {
@@ -87,6 +87,57 @@ public class Design {
             if (isEmpty(userInput)) {thisFieldCantBeEmpty(); continue;}
             autoCapitalizeFirstLetter(userInput);
             keepGoing = false;
+        }
+        return userInput;
+    }
+    public static String getGeneralString (Scanner scanner, String question) {
+        boolean keepGoing = true;
+        String userInput = null;
+
+        while (keepGoing) {
+            titleNewLineTop();
+            System.out.println(question);
+            titleLineBottom();
+            enterPrompt();
+            userInput = scanner.nextLine().trim().replaceAll("\\s+", " ");
+            if (isEmpty(userInput)) {thisFieldCantBeEmpty(); continue;}
+            keepGoing = false;
+
+        }
+        return userInput;
+    }
+    public static String getPasswordString (Scanner scanner) {
+        boolean keepGoing = true;
+        String userInput = null;
+
+        while (keepGoing) {
+            titleNewLineTop();
+            System.out.println("Please enter a password. Spaces are not accepted.");
+            titleLineBottom();
+            enterPrompt();
+            userInput = scanner.nextLine().trim().replaceAll("\\s+", "");
+            if (isEmpty(userInput)) {thisFieldCantBeEmpty(); continue;}
+
+            boolean confrim = false;
+            while (!confrim) {
+                titleNewLineTop();
+                System.out.println("Please retype password to confirm");
+                titleLineBottom();
+                enterPrompt();
+                String userConfirm = scanner.nextLine().trim().replaceAll("\\s+", "");
+                if (isEmpty(userConfirm)) {thisFieldCantBeEmpty(); continue;}
+                if (userConfirm.equals(userInput)) {
+                    titleNewLineTop();
+                    System.out.println("Password confirmed");
+                    titleLineBottom();
+                    keepGoing = false;
+                    confrim = true;
+                } else {
+                    titleNewLineTop();
+                    System.out.println("Incorrect password");
+                    confrim = true;
+                }
+            }
         }
         return userInput;
     }

@@ -2,9 +2,7 @@ package com.pluralsight.ui;
 
 import com.pluralsight.designElements.Design;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,6 +13,7 @@ public class LogInScreen {
         Design.titleNewLineTop();
         System.out.println("Hello! Please Sign In or Create User Profile.");
         Design.titleLineBottom();
+        System.out.println("\n\n");
 
 
     }
@@ -29,11 +28,14 @@ public class LogInScreen {
         }
         return userInfo;
     }
-    private static void createEmployeeProfile (Scanner scanner) {
+    private static void createEmployeeProfile (Scanner scanner) throws IOException {
         boolean keepGoing = true;
         while (keepGoing) {
-            Design.getNounPrompt(scanner, "Please Enter Profile Name (EMPLOYEE NAME).");
-
+            String profileName = Design.getNounPrompt(scanner, "Please Enter Profile Name (EMPLOYEE NAME).");
+            String userName = Design.getGeneralString(scanner, "Enter Username.");
+            String password = Design.getPasswordString(scanner);
+            BufferedWriter lilJon = new BufferedWriter(new FileWriter("userinfo.txt", true));
+            lilJon.write(profileName + "|" + userName +"|" + password);
         }
     }
 }
