@@ -1,75 +1,82 @@
 package com.pluralsight.objects;
 
 public class Room {
+    private String roomType = "";
     private int numberOfBeds = 0;
-    private double price = 0;
-    private boolean isOccupied = false;
-    private boolean isDirty = false;
-    private boolean isAvailable =  false;
+    private boolean occupied = false;
+    private boolean dirty = false;
+    private boolean available =  false;
 
-    public Room(int numberOfBeds, double price, boolean isOccupied, boolean isDirty, boolean isAvailable) {
+    public Room(String roomType, int numberOfBeds, boolean occupied, boolean dirty, boolean available) {
+        this.roomType = roomType;
         this.numberOfBeds = numberOfBeds;
-        this.price = price;
-        this.isOccupied = isOccupied;
-        this.isDirty = isDirty;
-        this.isAvailable = isAvailable;
+        this.occupied = occupied;
+        this.dirty = dirty;
+        this.available = available;
     }
 
-    // Getters
+    public String getRoomType() {
+        return roomType;
+    }
     public int getNumberOfBeds() {
         return numberOfBeds;
     }
-
-    public double getPrice() {
-        return price;
-    }
-
     public boolean isOccupied() {
-        return isOccupied;
+        return occupied;
     }
-
     public boolean isDirty() {
-        return isDirty;
+        return dirty;
     }
-
     public boolean isAvailable() {
-        return isAvailable;
+        return !isDirty() && !isOccupied();
     }
 
-    // Setters
+    public void setRoomType(String roomType) {
+        if (!roomType.equals("double") || !roomType.equals("king")) {
+            throw new RuntimeException("Invalid room type");
+        }
+        this.roomType = roomType;
+    }
     public void setNumberOfBeds(int numberOfBeds) {
         this.numberOfBeds = numberOfBeds;
     }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public void setOccupied(boolean occupied) {
-        isOccupied = occupied;
+        this.occupied = occupied;
     }
-
     public void setDirty(boolean dirty) {
-        isDirty = dirty;
+        this.dirty = dirty;
     }
-
     public void setAvailable(boolean available) {
-        isAvailable = available;
+        this.available = available;
     }
 
-    //Methods
-    public void checkIn (Boolean isOccupied, Boolean isAvailable, Boolean isDirty) {
-
-
+    public void checkIn () {
+        this.setOccupied(true);
+        this.setDirty(true);
+        this.setAvailable(false);
+    }
+    public void checkOut () {
+        this.setOccupied(false);
+        this.setDirty(true);
+         this.setAvailable(false);
+    }
+    public void cleanRoom () {
+        if (this.occupied) {
+            this.setDirty(false);
+        } else {
+            this.setDirty(false);
+            this.setAvailable(true);
+        }
+        this.setDirty(false);
     }
 
     //ToString
     @Override
     public String toString() {
-        return "Number of beds: " + numberOfBeds + "\n" +
-                "Price of room: $" + price + "\n" +
-                "Occupied: " + (isOccupied ? "Yes" : "No") + "\n" +
-                "Dirty: " + (isDirty ? "Yes" : "No") + "\n" +
-                "Available: " + (isAvailable ? "Yes" : "No");
+        return "Room type: " + roomType + "\n" +
+                "Number of beds: " + numberOfBeds + "\n" +
+                "Occupied: " + (occupied ? "Yes" : "No") + "\n" +
+                "Dirty: " + (dirty ? "Yes" : "No") + "\n" +
+                "Available: " + (available ? "Yes" : "No");
     }
 }
