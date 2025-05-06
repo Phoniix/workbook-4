@@ -9,6 +9,8 @@ public class EmployeeScreenHome {
         }
     }
 
-    public static
+    public static void homeScreen () {
+        System.out.println("Hello Employee");
+    }
 
 }

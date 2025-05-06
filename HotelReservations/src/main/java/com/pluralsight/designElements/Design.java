@@ -141,4 +141,20 @@ public class Design {
         }
         return userInput;
     }
+    public static String enterPassword (Scanner scanner) {
+        boolean keepGoing = true;
+        String userInput = null;
+
+        while (keepGoing) {
+            titleNewLineTop();
+            System.out.println("Enter your password.");
+            titleLineBottom();
+            enterPrompt();
+            userInput = scanner.nextLine().trim().replaceAll("\\s+", "");
+            if (isEmpty(userInput)) {thisFieldCantBeEmpty(); continue;}
+            keepGoing = false;
+
+        }
+        return userInput;
+    }
 }
