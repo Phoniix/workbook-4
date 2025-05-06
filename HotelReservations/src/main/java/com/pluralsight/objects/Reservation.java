@@ -44,7 +44,7 @@ public class Reservation {
     public void setNumberOfNights(int numberOfNights) {
         this.numberOfNights = numberOfNights;
     }
-    public void setWeekend(boolean weekend, DayOfWeek days) {
+    public void setWeekend(boolean weekend) {
 
         this.weekend = weekend;
     }
