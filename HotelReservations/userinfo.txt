@@ -1,2 +1,4 @@
-USERNAME|PASSWORD
-admin|1234
+PROFILE_NAME|USERNAME|PASSWORD
+Admin|admin|1234
+Sean|seanasb|1234
+Sean|seanasb52058|Phoniix!123
